@@ -33,14 +33,12 @@ Route::group([
 
 Route::get('categories', 'CategoryController@getAll');
 
-
 Route::group([
     'middleware' => 'jwt.auth'
 ], function ($router) {
 
     Route::get('categories', 'CategoryController@getAll');
     Route::post('categories/new', 'CategoryController@new');
-
 
     Route::get('pricecategories', 'PriceCategoriesController@all');
     Route::get('pricecategories/{id}', 'PriceCategoriesController@get');
@@ -52,6 +50,7 @@ Route::group([
 
 
 
+    
     Route::get('portfolioitems', 'PortfolioController@all');
     Route::get('portfolioitem/{id}', 'PortfolioController@get');
     Route::post('portfolioitems/new', 'PortfolioController@new');

@@ -31,8 +31,6 @@ Route::group([
 
 });
 
-
-
 Route::get('categories', 'CategoryController@getAll');
 
 

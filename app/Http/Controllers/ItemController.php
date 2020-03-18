@@ -11,7 +11,7 @@ class ItemController extends Controller
 {
     public function getAll()
     {
-        $priceItems = Item::all();
+        $items = Item::all();
 
         return response()-> json([
             'items' => $items
@@ -42,14 +42,14 @@ class ItemController extends Controller
 
             return response()->json([
                 'status' => 'error',
-                'errors' =>  $validator->errors()->all()
-            ]);
+                'errors' =>  json_encode($validator->errors()->all(), JSON_UNESCAPED_UNICODE)
+            ], 400);
 
         } else {
 
             // $category = App\Category::find($categoryID);
 
-            $category = $item->category;
+            $category = $request->category;
 
             $item = json_decode($request->item);
 
@@ -62,7 +62,7 @@ class ItemController extends Controller
             $item->categories()->attach($category);
 
             return response()->json([
-                'priceItem' => $item
+                'item' => $item
             ], 200);
         }
         

@@ -32,18 +32,25 @@ Route::group([
 });
 
 Route::get('categories', 'CategoryController@getAll');
+Route::get('categories/{id}', 'CategoryController@getOne');
+Route::get('items', 'ItemController@getAll');
 
 Route::group([
     'middleware' => 'jwt.auth'
 ], function ($router) {
 
-    Route::get('categories', 'CategoryController@getAll');
+    //Route::get('categories', 'CategoryController@getAll');
+    
     Route::post('categories/new', 'CategoryController@new');
+    Route::post('categories/remove/{id}', 'CategoryController@remove');
+    Route::post('categories/update/{id}', 'CategoryController@update');
+
+    Route::post('items/new', 'ItemController@new');
+
 
     Route::get('pricecategories', 'PriceCategoriesController@all');
     Route::get('pricecategories/{id}', 'PriceCategoriesController@get');
-    Route::post('items/new', 'ItemController@new');
-    Route::post('pricecategories/remove/{id}', 'PriceCategoriesController@remove');
+   
     Route::post('pricecategories/update/{id}', 'PriceCategoriesController@update');
 
     Route::get('price', 'PriceItemsController@getAllWithCategory');

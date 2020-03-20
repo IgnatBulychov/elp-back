@@ -107,11 +107,12 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-       // $category->items()->detach($categoryID);
-
-        foreach ($category->items as $item) {
-            $category->items()->detach($item->id);
-        } 
+       if (count($category->items)) {
+            foreach ($category->items as $item) {
+                $toDetach[] = $item->id;
+            } 
+            $category->items()->detach($toDetach);
+        }
 
         $category->delete();
 

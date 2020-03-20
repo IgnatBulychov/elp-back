@@ -34,27 +34,19 @@ Route::group([
 Route::get('categories', 'CategoryController@getAll');
 Route::get('categories/{id}', 'CategoryController@getOne');
 Route::get('items', 'ItemController@getAll');
+Route::get('items/{id}', 'ItemController@getOne');
 
 Route::group([
     'middleware' => 'jwt.auth'
 ], function ($router) {
 
-    //Route::get('categories', 'CategoryController@getAll');
-    
     Route::post('categories/new', 'CategoryController@new');
     Route::post('categories/remove/{id}', 'CategoryController@remove');
     Route::post('categories/update/{id}', 'CategoryController@update');
 
     Route::post('items/new', 'ItemController@new');
-
-
-    Route::get('pricecategories', 'PriceCategoriesController@all');
-    Route::get('pricecategories/{id}', 'PriceCategoriesController@get');
-   
-    Route::post('pricecategories/update/{id}', 'PriceCategoriesController@update');
-
-    Route::get('price', 'PriceItemsController@getAllWithCategory');
-
+    Route::post('items/remove/{id}', 'ItemController@remove');
+    Route::post('items/update/{id}', 'ItemController@update');
 
 
     
@@ -64,11 +56,5 @@ Route::group([
     Route::post('portfolioitems/remove/{id}', 'PortfolioController@remove');
     Route::post('portfolioitems/update/{id}', 'PortfolioController@update');
 
-    Route::get('priceitems/', 'PriceItemsController@all');
-    Route::get('priceitems/{id}', 'PriceItemsController@getByCategory');
-    Route::get('priceitem/{id}', 'PriceItemsController@get');
-    Route::post('priceitems/new', 'PriceItemsController@new');
-    Route::post('priceitems/remove/{id}', 'PriceItemsController@remove');
-    Route::post('priceitems/update/{id}', 'PriceItemsController@update');
 
 });

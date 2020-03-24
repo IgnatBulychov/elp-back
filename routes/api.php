@@ -48,6 +48,10 @@ Route::group([
     Route::post('items/remove/{id}', 'ItemController@remove');
     Route::post('items/update/{id}', 'ItemController@update');
 
+    Route::get('files', 'FileController@getAll');
+    Route::post('files/new', 'FileController@new');
+    Route::post('files/remove/{id}', 'FileController@remove');
+
 
     
     Route::get('portfolioitems', 'PortfolioController@all');

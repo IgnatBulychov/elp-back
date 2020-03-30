@@ -35,6 +35,8 @@ Route::get('categories', 'CategoryController@getAll');
 Route::get('categories/{id}', 'CategoryController@getOne');
 Route::get('items', 'ItemController@getAll');
 Route::get('items/{id}', 'ItemController@getOne');
+Route::get('works', 'WorkController@getAll');
+Route::get('works/{id}', 'WorkController@getOne');
 
 Route::group([
     'middleware' => 'jwt.auth'
@@ -52,13 +54,8 @@ Route::group([
     Route::post('files/new', 'FileController@new');
     Route::post('files/remove/{id}', 'FileController@remove');
 
-
-    
-    Route::get('portfolioitems', 'PortfolioController@all');
-    Route::get('portfolioitem/{id}', 'PortfolioController@get');
-    Route::post('portfolioitems/new', 'PortfolioController@new');
-    Route::post('portfolioitems/remove/{id}', 'PortfolioController@remove');
-    Route::post('portfolioitems/update/{id}', 'PortfolioController@update');
-
+    Route::post('works/new', 'WorkController@new');
+    Route::post('works/remove/{id}', 'WorkController@remove');
+    Route::post('works/update/{id}', 'WorkController@update');
 
 });

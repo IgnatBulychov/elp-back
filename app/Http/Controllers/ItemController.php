@@ -128,7 +128,9 @@ class ItemController extends Controller
                 $item->categories()->detach($toDetach);
             }
 
-            if ($categories) {
+        
+
+            if (count($categories)) {
                 foreach ($categories as $category) {
                     $toAttach[] = $category;
                 }
@@ -136,7 +138,7 @@ class ItemController extends Controller
             }
 
             return response()->json([
-                'item' => $item
+                'item' =>  $item
             ], 200);
         }
         

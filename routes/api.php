@@ -32,20 +32,20 @@ Route::group([
 });
 
 Route::get('categories', 'CategoryController@getAll');
-Route::get('categories/{id}', 'CategoryController@getOne');
 Route::get('items', 'ItemController@getAll');
-Route::get('items/{id}', 'ItemController@getOne');
 Route::get('works', 'WorkController@getAll');
-Route::get('works/{id}', 'WorkController@getOne');
+Route::get('reviews', 'ReviewController@getAll');
 
 Route::group([
     'middleware' => 'jwt.auth'
 ], function ($router) {
 
+    Route::get('categories/{id}', 'CategoryController@getOne');
     Route::post('categories/new', 'CategoryController@new');
     Route::post('categories/remove/{id}', 'CategoryController@remove');
     Route::post('categories/update/{id}', 'CategoryController@update');
 
+    Route::get('items/{id}', 'ItemController@getOne');
     Route::post('items/new', 'ItemController@new');
     Route::post('items/remove/{id}', 'ItemController@remove');
     Route::post('items/update/{id}', 'ItemController@update');
@@ -54,8 +54,14 @@ Route::group([
     Route::post('files/new', 'FileController@new');
     Route::post('files/remove/{id}', 'FileController@remove');
 
+    Route::get('works/{id}', 'WorkController@getOne');
     Route::post('works/new', 'WorkController@new');
     Route::post('works/remove/{id}', 'WorkController@remove');
     Route::post('works/update/{id}', 'WorkController@update');
+
+    Route::get('reviews/{id}', 'ReviewController@getOne');
+    Route::post('reviews/new', 'ReviewController@new');
+    Route::post('reviews/remove/{id}', 'ReviewController@remove');
+    Route::post('reviews/update/{id}', 'ReviewController@update');
 
 });

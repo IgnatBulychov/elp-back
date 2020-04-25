@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function getAll()
     {
-        $categories = Category::all();
+        $categories = Category::all()->load('items');
 
         return response()-> json([
             'categories' => $categories
@@ -48,15 +48,11 @@ class CategoryController extends Controller
 
         } else {
 
-            // $category = App\Category::find($categoryID);
-
             $category = json_decode($request->category);
 
             $category = Category::create([
                 'title' => $category->title
             ]);
-
-           // $item->categories()->attach($categoryID);
 
             return response()->json([
                 'category' => $category
@@ -89,7 +85,6 @@ class CategoryController extends Controller
         } else {
 
             $categoryNewData = json_decode($request->category);
-
 
             $category = Category::find($id);
 

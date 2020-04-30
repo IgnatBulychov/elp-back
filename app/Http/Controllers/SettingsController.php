@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Files;
 use App\Settings;
 use Validator;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class SettingsController extends Controller
 {
     public function getAll()
     {
-        $settings = Settings::all()->first();
+        $settings = Settings::all()->first()->load('file');
 
         return response()-> json([
             'settings' => $settings
@@ -64,7 +65,8 @@ class SettingsController extends Controller
             $settings = Settings::all()->first();
 
             $settings->title = $settingsNewData->title;
-            $settings->description = $settingsNewData->description;
+            $settings->subtitle = $settingsNewData->subtitle;
+            $settings->file_id = $settingsNewData->file_id;
             $settings->about = $settingsNewData->about;
             $settings->phone = $settingsNewData->phone;
             $settings->email = $settingsNewData->email;
@@ -78,7 +80,8 @@ class SettingsController extends Controller
             $settings->save();
 
             return response()->json([
-                'settings' => $settings
+                'settings' => $settings,
+                'file' => $settings->file
             ], 200);
         }
         

@@ -13,7 +13,8 @@ class SettingsTableSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'title' => 'Header',
-            'description' => 'Description',
+            'subtitle' => 'Subtitle',
+            'file_id' => null,
             'about' => 'About...',
             'phone' => '79210000000',
             'email' => 'no-reply@elp.com',

@@ -20,7 +20,7 @@ class FileController extends Controller
     public function new(Request $request)
     {
        
-        $validateData['files'] = $request->files;   // добавляем в массив изображения
+        $validateData['files'] = $request->files; 
        
         $validator = Validator::make(
             $validateData,

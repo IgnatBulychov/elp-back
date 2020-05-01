@@ -47,14 +47,18 @@ class FileController extends Controller
         } else {
 
             foreach($request->file('files') as $file) {
+                
                 $file = $file->store('public/files');
+
+                $file = asset(Storage::url($file));
+
                 File::create([
-                    'src' =>  $file
+                   'src' => $file
                 ]);
             }
 
             return response()->json([
-                'files' =>  'success'
+                'status' => 'succcess'
             ], 200);
         }
     }
@@ -62,12 +66,12 @@ class FileController extends Controller
     {
         $file = File::find($id);
 
-        Storage::delete($file->src);
+        Storage::delete('public'.str_replace(asset('/').'storage', '', $file->src));
 
         $file->delete();
         
         return response()->json([
-            'status' => 'success'
+            'status' => 'succcess'
         ], 200);
     }
 }

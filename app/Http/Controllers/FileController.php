@@ -48,9 +48,13 @@ class FileController extends Controller
 
             foreach($request->file('files') as $file) {
                 
-                $file = $file->store('public/files');
-
-                $file = asset(Storage::url($file));
+                if ((env('FTP_HOST') == 'ftp.gear.host') && (env('FILESYSTEM_DRIVER') == 'ftp')) {
+                    $file = $file->store('site/wwwroot/files');
+                    $file = env('FTP_WEB_URL').str_replace('site/wwwroot', '', $file);
+                } else {
+                    $file = $file->store('public/files');
+                    $file = asset(Storage::url($file));
+                }  
 
                 File::create([
                    'src' => $file
@@ -58,7 +62,7 @@ class FileController extends Controller
             }
 
             return response()->json([
-                'status' => 'succcess'
+                'status' => 'success'
             ], 200);
         }
     }
@@ -66,12 +70,17 @@ class FileController extends Controller
     {
         $file = File::find($id);
 
-        Storage::delete('public'.str_replace(asset('/').'storage', '', $file->src));
-
+        if ((env('FTP_HOST') == 'ftp.gear.host') && (env('FILESYSTEM_DRIVER') == 'ftp')) { 
+            $path = 'site/wwwroot'.str_replace(env('FTP_WEB_URL'), '', $file->src);
+            Storage::delete($path);
+        } else {
+            Storage::delete('public'.str_replace(asset('/').'storage', '', $file->src));
+        }
+        
         $file->delete();
         
         return response()->json([
-            'status' => 'succcess'
+            'status' => 'success'
         ], 200);
     }
 }

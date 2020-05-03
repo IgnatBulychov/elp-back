@@ -31,6 +31,8 @@ Route::group([
 
 });
 
+Route::get('landing', 'LandingController@getAll');
+
 Route::get('advantages', 'AdvantageController@getAll');
 Route::get('advantages/{id}', 'AdvantageController@getOne');
 Route::get('categories', 'CategoryController@getAll');

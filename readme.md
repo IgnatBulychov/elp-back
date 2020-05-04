@@ -15,9 +15,9 @@ ELP is a one-page site template with a control panel. This application consists 
 
 ## Installation
 
-```
-git clone https://github.com/IgnatBulychov/elp-back.git
-```
+
+- ** git clone https://github.com/IgnatBulychov/elp-back.git **
+
 
 ```
 composer install

@@ -6,14 +6,27 @@ use App\Category;
 use Validator;
 use Illuminate\Http\Request;
 
+
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
+
 class CategoryController extends Controller
 {
     public function getAll()
     {
         $categories = Category::all()->load('items');
-
+        
+        $process = new Process(['mkdir', 'asjkdhakjshdjkashdkjashd']);
+        $process->run();
+        
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        
         return response()-> json([
-            'categories' => $categories
+            'categories' => $categories,
+            'sd' => $process->getOutput()
         ], 200);
     }
     public function getOne($id)
